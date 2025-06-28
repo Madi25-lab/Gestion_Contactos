@@ -82,8 +82,31 @@ void Agregar_Contacto(contactoEmail Contactos[], int &cont){
 	cout<<endl;
     cout<<"No hay contactos para eliminar!!"<<endl;
 	cout<<endl;
+    }
 }
-	}
+
+void Mostrar_Listado_General(contactoEmail Contacto[], int cont){
+	
+    if (cont != 0){
+    cout<<"==========================================================" << endl;
+    cout<<"                   Registro de contactos" << endl;
+    cout<<"==========================================================" << endl;	
+        for (int i = 0; i < cont; i++){
+            cout << i + 1 << ") -------------------Contacto---------------------"<< endl;
+            cout << "Nombre: " << Contacto[i].nombre << endl;
+            cout << "Sexo: " << Contacto[i].sexo << endl;
+            cout << "Edad: " << Contacto[i].edad << endl;
+            cout << "Teléfono: " << Contacto[i].telefono << endl;
+            cout << "Email: " << Contacto[i].email << endl;
+            cout << "Nacionalidad: " << Contacto[i].nacionalidad << endl;
+        }
+    }else {
+    	cout<<endl;
+        cout << "No hay registro de contactos!!" << endl;
+        cout<<endl;
+    }
+}
+
         
     
 	
@@ -98,7 +121,7 @@ int main (){
 	do{
 		cout<<"a) Agregar un contacto" <<endl;
 		cout<<"b) Eliminar un contacto" <<endl;
-		cout<<"c) Mostrar listado general de contactos registrados hasta ese momento" <<endl;
+		cout<<"c) Mostrar listado general de contactos registrados" <<endl;
 		cout<<"d) Mostrar listado de contactos existentes, ordenado por servidor de correo de las cuentas" <<endl;
 		cout<<"e) Salir" <<endl;
 		cout<<"Seleccione una alternativa: ";
@@ -117,6 +140,7 @@ int main (){
 			}
 			
 			case 'c':{
+				Mostrar_Listado_General(Contactos, cont);
 				break;
 			}
 				
@@ -125,16 +149,22 @@ int main (){
 			}
 				
 			case 'e':{
+				cout<<endl;
+				cout<<"Saliendo del programa ... ";
+				cout<<endl;
 				break;
 			}
 				
 			default:{
+				cout<<endl;
+				cout<<"-------Alternativa invalida--------"<<endl;
+				cout<<endl;
 				break;
 			}
 					
 		}
 	}while (eleccion !='e');
-	cout<<"Saliendo del programa ... ";
+	
 	
 	return 0;
 }
