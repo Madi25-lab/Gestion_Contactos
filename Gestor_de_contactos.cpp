@@ -52,6 +52,41 @@ void Agregar_Contacto(contactoEmail Contactos[], int &cont){
 	cout<<"--------------------Contacto agregado-----------------------"<<endl;
 	cout<<endl;
 	}
+	
+	
+	void Eliminar_Contacto(contactoEmail Contactos[], int &cont){
+		
+	if(cont!=0){
+		
+	int orden;
+	cout<<"==========================================================" << endl;
+    cout<<"                   Eliminar Contacto" << endl;
+    cout<<"==========================================================" << endl;	
+    cout<<"Ingrese el numero de orden del contacto: ";
+    cin>>orden;
+	
+	orden=orden-1;	
+	if(orden>=0 && orden<cont){
+		for(int i=orden;i<cont-1;i++){
+			Contactos[i]=Contactos[i+1];
+		}
+		cont --;
+		cout<<endl;
+	    cout<<"-------------------Contacto eliminado---------------------"<<endl;
+	    cout<<endl;
+	}else{
+		cout<<"No hay registro de este numero orden "<<endl;
+		cout<<endl;
+	}
+	}else { 
+	cout<<endl;
+    cout<<"No hay contactos para eliminar!!"<<endl;
+	cout<<endl;
+}
+	}
+        
+    
+	
 
 int main (){
 	char eleccion;
@@ -70,7 +105,6 @@ int main (){
 		cin>> eleccion;
 		cout<<endl;
 	    
-		
 		switch (eleccion) {
 			case 'a':{
 				Agregar_Contacto(Contactos, cont);
@@ -78,6 +112,7 @@ int main (){
 			}
 				
 			case 'b':{
+				Eliminar_Contacto(Contactos, cont);
 				break;
 			}
 			
