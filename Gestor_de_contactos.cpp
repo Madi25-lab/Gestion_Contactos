@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 using namespace std;
 int cont=0;
 const int Max=100;
@@ -39,7 +40,7 @@ void Agregar_Contacto(contactoEmail Contactos[], int &cont){
 	cin>>Contactos[cont].telefono;
 	cout<<endl;
 	
-	cout<<"Ingrese el Email (cuenta@gmail.com): ";
+	cout<<"Ingrese el Email (cuenta@servidor.com): ";
 	cin.ignore();
 	getline(cin,Contactos[cont].email);
 	cout<<endl;
@@ -96,7 +97,7 @@ void Mostrar_Listado_General(contactoEmail Contacto[], int cont){
             cout << "Nombre: " << Contacto[i].nombre << endl;
             cout << "Sexo: " << Contacto[i].sexo << endl;
             cout << "Edad: " << Contacto[i].edad << endl;
-            cout << "Teléfono: " << Contacto[i].telefono << endl;
+            cout << "Telefono: " << Contacto[i].telefono << endl;
             cout << "Email: " << Contacto[i].email << endl;
             cout << "Nacionalidad: " << Contacto[i].nacionalidad << endl;
         }
@@ -107,7 +108,56 @@ void Mostrar_Listado_General(contactoEmail Contacto[], int cont){
     }
 }
 
-        
+string Servidor(string email) {
+    string servidor = "";
+    bool arroba = false;
+    
+	int i = 0;
+    while (email[i] != '\0') {
+        if (arroba) {
+            servidor=servidor+email[i];
+        }
+        if (email[i] == '@') {
+            arroba = true;
+        }
+        i++;
+    }
+    return servidor;
+}
+
+void Lista_Servidor(contactoEmail Contacto[], int cont){
+	
+	if(cont!=0){
+	int aux;	
+    contactoEmail Valor[Max];
+    for(int i=0;i<cont;i++){
+        Valor[i]=Contacto[i];
+    }
+    for(int i=0;i<cont-1;i++){
+        for (int j=0;j<cont-i-1;j++){
+        	string dom1, dom2;
+            dom1=Servidor(Valor[j].email);
+            dom2=Servidor(Valor[j+1].email);
+            if (dom1>dom2){
+                contactoEmail aux=Valor[j];
+                Valor[j]=Valor[j+1];
+                Valor[j+1]=aux;
+            }
+        }
+    }  
+    cout<<"==========================================================" << endl;
+    cout<<"                   REGISTRO DE CONTACTOS" << endl;
+    cout<<"==========================================================" << endl;	
+    for(int i=0;i<cont;i++){
+        cout<<i+1<<"Nombre: "<<Valor[i].nombre<<endl;
+        cout<<"Email: "<<Valor[i].email<<" (Servidor(@): "<<Servidor(Valor[i].email)<<")"<<endl; 
+		cout<<endl;  
+    }
+}else{cout<<endl;
+        cout << "No hay registro de contactos!!" << endl;
+        cout<<endl;
+    }
+}      
     
 	
 
@@ -119,6 +169,9 @@ int main (){
     cout << "==========================================================" << endl;
     
 	do{
+		cout<<endl;
+    	cout<<"------------------------OPCIONES-------------------------"<<endl;
+    	cout<<endl;
 		cout<<"a) Agregar un contacto" <<endl;
 		cout<<"b) Eliminar un contacto" <<endl;
 		cout<<"c) Mostrar listado general de contactos registrados" <<endl;
@@ -127,6 +180,7 @@ int main (){
 		cout<<"Seleccione una alternativa: ";
 		cin>> eleccion;
 		cout<<endl;
+		system("cls");
 	    
 		switch (eleccion) {
 			case 'a':{
@@ -145,6 +199,7 @@ int main (){
 			}
 				
 			case 'd':{
+				Lista_Servidor(Contactos, cont);
 				break;
 			}
 				
